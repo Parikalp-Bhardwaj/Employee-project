@@ -1,0 +1,25 @@
+{
+  "People": [
+    {
+      "id": 1,
+      "fname": "Sam",
+      "lname": "Morris",
+      "age": 22,
+      "profession": "Doctor"
+    },
+    {
+      "id": 2,
+      "fname": "Jhon",
+      "lname": "Cartin",
+      "age": 23,
+      "profession": "Engineer"
+    },
+    {
+      "id": 3,
+      "fname": "Finn",
+      "lname": "Perry",
+      "age": 21,
+      "profession": "HR"
+    }
+  ]
+}
