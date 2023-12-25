@@ -15,12 +15,3 @@ pub fn load_from_json(file_path: &str) -> Result<List, Box<dyn std::error::Error
     Ok(list)
 }
 
-// pub fn save_to_json(&self, file_path: &str) {
-//     let json_data = serde_json::to_string_pretty(self)?;
-//     // Create or open the file at the specified path
-//     let mut file = File::create(file_path)?;
-//     // Write the JSON data to the file
-//     file.write_all(json_data.as_bytes())?;
-//     println!("Data saved to {}", file_path);
-//     // Ok(())
-// }

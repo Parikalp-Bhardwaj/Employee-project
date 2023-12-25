@@ -2,8 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fs::File;
 use std::io::{self, Write};
-
-use std::io::Read;
 use std::num::ParseIntError;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -67,10 +65,8 @@ impl List {
     pub fn process_choice(&mut self, val: i32) {
         match val {
             1 => {
-                // Add Person logic
-                // self.add_person(1, "parikalp", "bhardwaj", 20, "developer");
                 let mut new_id = String::new();
-                println!("A unique Id: \n");
+                println!("A unique Id: ");
                 io::stdin()
                     .read_line(&mut new_id)
                     .expect("Failed to read lines");
@@ -198,7 +194,10 @@ impl List {
                             new_profession.trim(),
                         ) {
                             Ok(data) => {
-                                println!("Employees information has been changed successfully");
+                                println!(
+                                    "Employees information has been changed successfully {:#?}\n",
+                                    data
+                                );
                             }
                             Err(err) => {
                                 println!("Error: {}", err);
@@ -210,6 +209,26 @@ impl List {
                     }
                 }
             }
+
+            4 => {
+                println!("Delete The Employee By ID: ");
+                let mut ids = String::new();
+                io::stdin()
+                    .read_line(&mut ids)
+                    .expect("Failed to read lines");
+                let i_d = ids.trim().parse::<i32>();
+
+                if let Ok(i_d_val) = i_d {
+                    if let Some(index) = self.People.iter().position(|emp| emp.id == i_d_val) {
+                        self.People.remove(index);
+                        println!("Employee with ID {} removed successfully", i_d_val);
+                    } else {
+                        println!("No employee found with ID {}", i_d_val);
+                    }
+                } else {
+                    println!("Invalid input for employee ID");
+                }
+            }
             _ => {
                 println!("InValid Number ");
             }
@@ -217,30 +236,11 @@ impl List {
     }
 
     // Read from json data
-
     pub fn save_to_json(&self, file_path: &str) -> Result<(), Box<dyn Error>> {
-        // Serialize the data to JSON
         let json_data = serde_json::to_string_pretty(self)?;
-
-        // Create or open the file at the specified path
         let mut file = File::create(file_path)?;
-
         // Write the JSON data to the file
         file.write_all(json_data.as_bytes())?;
-
-        println!("Data saved to {}", file_path);
-
         Ok(())
-    }
-
-    pub fn load_from_json(&self, file_path: &str) -> Result<List, Box<dyn std::error::Error>> {
-        let mut file = File::open(file_path)?;
-        let mut json_data = String::new();
-        file.read_to_string(&mut json_data)?;
-
-        let list: List = serde_json::from_str(&json_data)
-            .map_err(|err| Box::new(err) as Box<dyn std::error::Error>)?;
-
-        Ok(list)
     }
 }

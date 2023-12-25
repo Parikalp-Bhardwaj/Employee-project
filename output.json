@@ -15,11 +15,18 @@
       "profession": "Engineer"
     },
     {
+      "id": 900,
+      "fname": "Sam",
+      "lname": "Curren",
+      "age": 26,
+      "profession": "Gamer"
+    },
+    {
       "id": 3,
-      "fname": "Finn",
-      "lname": "Perry",
-      "age": 21,
-      "profession": "HR"
+      "fname": "Smith",
+      "lname": "jhon",
+      "age": 25,
+      "profession": "Athlete"
     }
   ]
 }
